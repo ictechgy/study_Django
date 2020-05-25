@@ -1,0 +1,25 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ data.title }}{% endblock title %}
+
+{% block content %}
+<h1>
+    {{ data.title }}
+</h1>
+<p>
+    {{ data.content }}
+</p>
+<div class="text-center">
+    <button class="btn btn-outline-primary" type="button">추천</button>
+    <button class="btn btn-outline-danger" type="button">비추천</button>
+</div>
+<div class="text-right">
+    <button class="btn btn-outline-success" type="button">수정</button>
+    <button class="btn btn-outline-danger" type="button">삭제</button>
+    <button class="btn btn-outline-primary" type="button" onclick=location.href="{% url 'board:index' %}">목록</button> <!--location.back() 어떻게 구현하더라 location.href=back 이었나 뭐더라-->
+</div>
+<hr>
+<div>
+    {% include 'board/comment.html' with comment=comment board_id=data.id%}  <!-- with로 값 안보내줘도 잘만 되네 -->
+</div>
+{% endblock %}

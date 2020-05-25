@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        {{ data.tag_context }}
+        html태그가 반영이 된 형태가 아니라 코드 자체가 나온다.
+        html에서 태그로 인식이 안되게 Escape문자가 끼여서 나온다.
+        그러면
+        {{% autoescape off %}}
+            {{ data.tag_context }}
+        {{% endautoescape %}}
+
+
+
+
+
+
+
+        2018-06-21
+        사용자가 /htm/이라는 url로 접속을 하면 index.html을 볼 수 있다. 그곳에는 데이터베이스에 존재하는 tag_name을 목록으로서 볼 수 
+        있도록 만들어 놓았었다. 각각의 태그들은 링크로서 클릭할 수 있는데, 클릭하면 해당 태그명에 맞는 데이터베이스 context값을 보여줄
+        수 있는 페이지로 이 tags.html을 만들어놓았다. 이제 이 페이지에 수정과 삭제버튼을 만들어서 값을 수정할 수 있도록 만들자
+        수정과 삭제버튼 만들어서 데이터베이스의 데이터를 변경하기
+
+        <button type=button onclick='location.href="/htm/tag/update/?id={{ data.id }}"'>수정</button>
+        사용자가 어떤 데이터베이스 페이지를 보고 있었는지를 알아야 수정버튼 눌렀을 시 나오는 양식에서 이전 내용들 띄우지
+
+
+
+
+        삭제버튼 만들기
+        <button type="button" onclick='location.href="/htm/tag/delete/?id={{ data.id }}"'>삭제</button>
+
+
+
+        선생님은..
+        <div>
+            <button type="button" onclick='location.href="/htm/tag/update/?id={{ data.id }}"'>수정</button>
+        </div>
+        수정버튼을 클릭한다고 다가 아니다. 수정페이지를 보여 줄 때 사용자가 어떤 페이지를 보고 있었는지를 알아야한다.
+        아이디또는 태그이름을 파라미터로 전달해주자
+        수정은 유일한 것을 대상으로 수정해야하니 id가 더 낫긴 하다.
+        태그이름으로 한다면 여러 데이터가 있는경우 검증하는 과정이 필요하다
+        data.id로 할 건데, 그러면 이 페이지에 data변수에 id값이 있어야한다. 그러면 이 페이지를 보여줄 때 넘어온 id값이 존재해야한다.
+        따라서 views에서 이 tags.html을 실행시켜주는 함수를 보고 id가 넘어오도록 만들어준다. htmTag()함수
+        수정을 할 때 수정을 하고자 하는 자료가 무엇이냐를 알려줘야 함
+
+        <div>
+            <button type="button" onclick='location.href="/htm/tag/delete/?id={{ data.id }}"'>삭제</button>
+        </div>
+        
+
+    </body>
+</html>

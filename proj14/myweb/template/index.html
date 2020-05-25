@@ -1,0 +1,66 @@
+이곳은 로그인 성공시 도착하게 될 메인페이지 '/' 이다.(물론 로그인 안했을 때에도 접근가능한 메인페이지)
+
+로그인한 상황인지 아닌지 알고싶다면?
+로그인을 했다면 로그인한 계정의 username이 나오고 로그인이 안된 상태라면 아무것도 안뜬다
+로그인을 했다면 모든페이지에서 user에 대한 데이터가 돌아다니는거네
+<div>{{ user.username }}</div>
+
+<div>계정활성유무 : {{ user.is_active }}</div> 
+
+<div>활성화된 계정을 가지고 인증처리까지 다 됐느냐 : {{ user.is_authenticated }}</div>
+이걸 로그인유무 판단할때 주로 쓴다고 한다.
+
+
+<div>
+    {% if user.is_authenticated == True %}    <!-- 공백에 유의해야하며 'True'가 아닌 True값임 -->
+       환영합니다. {{ user.username }}님
+       <button type="button" onclick=location.href='{% url 'logout' %}'>로그아웃</button>
+       <!-- 이 버튼 누르면 /account/logout/으로 연결이 되면서 url(r'^account/', include('django.contrib.auth.urls')) 패턴을 따라 들어가
+        자동으로 로그아웃이 되고 logged_out.html이 뜨게 됨 -->
+    {% else %}
+        <button type="button" onclick=location.href='{% url 'join' %}'>회원가입</button>
+        <!--위의 버튼 누르면 /account/join/ 이라는 url을 접속하려고 한게 되며, 해당 url패턴에 따라 views를 거쳐 join.html이 반환된다.-->
+        <button type="button" onclick=location.href="{% url 'login' %}">로그인</button>
+        <!--위의 버튼을 누르면 /account/login/이라는 url을 요청한게 되고, url(r'^account/', include('django.contrib.auth.urls'))에 따라 login.html파일이 던져짐-->
+    {% endif %}
+</div>
+onclick 을 쓸 때 가장 바깥쪽 따옴표는 위와 같이 없어도 되긴 함(사실 모든 속성이 다 그렇게 쓸 수 있지만 구분을 위해 쓰는 것 같음)
+다만 안에 name이나 namespace를 감싸는 따옴표는 필수임. 없애면 오류뜸
+{% 를 감싸는 따옴표를 없애니 url 링크가 제대로 동작 안함
+따라서 가장 바깥쪽 따옴표만 없애도 되고, 다른 것들은 꼭 해줘야 하는듯
+
+로그아웃시 Redirect는 어떻게 하는거지
+난 왜 로그아웃버튼 누르면 /account/logout/을 통해 loged_out.html로 연결되는게 아니라 다른 페이지로 연결이 되는거냐
+url은 /account/logout/이 맞기는 한데 loged_out.html이 켜지는게 아닌데..?
+아하 loged_out이 아니라 logged_out.html 이라고 써야 로그아웃시 저 html파일로 잘 연결이 되네
+저 페이지를 찾지를 못해서 기본 로그아웃 완료페이지를 띄운 거였나봄
+
+아..if 조건식에서== True를 할 필요가 없네
+
+href 링크에 대한 #은 임시표시. 이동 안함
+namespace는 include함수에서, name은 일반적인 url패턴에서 사용
+
+이 로그인과 로그아웃 버튼에 대해 모든 페이지에 띄우고 싶을 때 네비게이션 <nav></nav> 로 만들고 계층구조를 이용해서
+다른 모든 페이지들에서는 include만 하면 될 듯. 다만 include할 때 사용자 로그인정보를 user=user 로 넘겨줘야하나
+넘겨줘야 하는거 아닌가? 이 로그인/로그아웃을 네비게이션 메뉴 바로 모든 페이지에서 고정시킨다고 했을 때 네비게이션 바를 navi.html로 따로 빼놨다고 하자.
+다른 모든 html파일에서 include로 navi.html을 하면 해당 navi 페이지를 구성시키고 그 결과값을 돌려받는식으로 페이지를 구성시킨다고 했는데.. 그러면 user정보를
+넘겨주는게 상식적인거 아닌가?
+
+아니면 이 네비게이션을 다른 html로 분리시켜놓고 그걸 base.html에서 include시키면 다른 페이지들에서는 그냥 base.html만
+extends하는 것으로서 네비게이션바 사용 가능..
+
+<nav></nav> 네비게이션 만들 때 쓰는 태그
+주로 메뉴바를 쓸 때 사용하는 태그이다. 구역분리용으로 그냥 쓰는 태그
+또 네비게이션 nav 태그에 대한 독자적인 CSS 스타일도 구현되어있겠지
+
+
+궁금증 1. 모든 html페이지들로 user에 대한 데이터는 넘어가는 것인가  -> 그렇다. 자동으로 다 넘어온다.
+    우리가 이 index.html을 실행시키기 위해 해당 함수에서 user에 대한 데이터는 넘겨준 적이 없다. 그래도 잘 된다.
+    request에 담겨있는건가? 그런거 같음
+    (views.py의 Index()를 통해 이 index.html 이 던져지든.. 로그인 성공 뒤 자동으로 이 페이지가 던져지든.. request에 담겨있는거 아닐까)
+궁금증 2. 위와 같이 네비게이션 navi.html을 base.html에서 include시키고 이제 이 index.html에서 extends base.html한다고 했을 때
+     user데이터는 넘겨주지 않아도 되는가 -> 그렇다
+    왜인지는 잘 모르겠다. 우선 extends로 base.html코드가 그대로 복사된다고 했을 때... 네비게이션에 대해 include는 그대로인데,,
+    왜 보내주지 않아도 되는거지? base.html에서 기본적으로 include nav.html with user=user 써놔야하는거 아닌가
+    
+

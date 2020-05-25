@@ -1,0 +1,7 @@
+{% extends 'vote/layout.html' %}
+
+{% block title %}{{ block.super }} 수정{% endblock %}
+
+{% block content %}
+    {% include 'vote/form.html' with urls="vote:update" data=data choices=choices %}
+{% endblock %}

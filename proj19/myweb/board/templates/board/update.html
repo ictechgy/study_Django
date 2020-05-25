@@ -1,0 +1,29 @@
+<!-- 수정양식은 insert 새 글 작성양식과 비슷하므로 forms.py 재사용 하심-->
+
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ data.title }} 수정{% endblock title %}
+
+{% block media %}
+    {{ block.super }}
+    {{ forms.media }} 
+{% endblock %}
+
+{% block content %}
+    <form action='{% url "board:update" %}' method="POST">{% csrf_token %}
+        <input type='hidden' name='id' value='{{ data.id }}'> 
+        <!-- 어떤 글에 대해 수정을 할 것인지 정보를 미리 박아놓고 사용자에게 보내줘야 나중에 받았을 때에도 아 이거 수정하고 있었구나 알 수 있음
+            이 부분에 대해 미리 forms.py에서 정의해놓아도 괜찮을 것. 새 글 추가할 때는 안 쓸 부분이겠다만.
+            미리 정의해놓고 이 update.html 페이지 넘겨주기 전 initial로 초기값 설정만 되도록 해두면 나중에 POST방식 처리할 때에는 받아서 쓰기만 하면 되니까
+            또는 위의 action 부분에서 parameter로 넘겨줄 수도 있을 것... 은 POST방식이라 안될 듯? -->
+
+        {% for input in forms %}
+            <div class="form-group">
+                {{ input }}
+            </div>
+        {% endfor %}
+        <div class="form-group text-right">
+            <button class='btn btn-outline-primary' type="submit">저장</button>
+        </div>
+    </form>
+{% endblock %}

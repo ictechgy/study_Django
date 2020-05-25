@@ -1,0 +1,71 @@
+{% extends 'layout.base.html' %}
+
+{% block title %}회원가입 페이지{% endblock %}
+
+{% block script %}
+    <script>
+        function idChk(){
+            //자바스크립트로 아이디 존재여부 확인해서 경고 띄울 수 있을까
+            //JSP시간때 내가 만들었던건 register.jsp에서 로그인 양식 다 입력 후 회원가입버튼 누르면 regiChk.jsp로 넘어가고 해당 jsp파일에서 
+            //데이터베이스 자체에서 비교한 다음에 아이디가 이미 존재하면 location.back()썼었는데 ..ㄴ그거 쓰고 아이디가 이미 존재한다는 경고를 띄웠었음
+            //만약 아이디생성 가능하다면 계정생성 다 해주고 계정생성 됐다고 메시지 띄운 다음에 response.sendRedirect로 로그인페이지 넘긴다던가..
+        }
+
+        function pwdChk(){
+            if (pwd1==pwd2){   // document.getElementById() 사용 가능
+                pwdChk.innerHTML="비밀번호 일치"
+            }
+            else{
+                pwdChk.innerHTML="비밀번호 불일치"
+            }
+        }
+
+        function regiChk(){
+            if (username==""){
+                alert('아이디를 입력하십시오')
+            }
+            else if (pwd1==""){
+                alert('비밀번호를 입력하십시오')
+            }
+            else if (pwd1!=pwd2){
+                alert('비밀번호가 비밀번호확인과 일치하지 않습니다')
+            }
+            else if(firstname==""){
+                alert('이름을 입력하십시오')
+            }
+            else if(lastname==""){
+                alert('성을 입력하십시오')
+            }
+            else if(email==''){
+                alert('이메일을 입력하십시오')
+            }
+            else{
+                regiForm.submit()
+            }
+            
+        }
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <form action='{% url "join" %}' method='POST' id=regiForm>{% csrf_token %}
+        <input type="text" name="username" placeholder="아이디" id=username onchange=idChk()><label id=idchk></label>
+        <input type="password" name="password" placeholder="비밀번호" id='pwd1'>
+        <input type="password" placeholder="비밀번호 확인" id='pwd2' onchange=pwdChk()><label id=pwdchk></label>
+        <input type="text" name="first_name" placeholder="이름" id=firstname>
+        <input type="text" name="last_name" placeholder="성" id=lastname>
+        <input type="text" name="email" placeholder="이메일" id=email>
+        <button type="button" onclick="regiChk()">회원가입</button>
+    </form>
+{% endblock %}
+
+<!-- html 태그 중에서 속성 Attribute로 required 로 필수입력을 만들수도 있구나. 
+아이디 중복체크 버튼을 만들수도 있는건가. GET방식으로 POST방식으로? 버튼 누르면 어떤방식으로 되게 해야하는 거지?
+팝업창 뜨게? 아니면 그냥 버튼만 누르면 alert 창으로 사용가능한 id이다 아니다 띄우게? 다른 페이지로 넘어가는게 아니라?
+JSP에서는 약간 그런식으로 하도록 만들긴 했는데..
+페이지 이동 안시키고 원하는 자료를 주고 받고 이런거 하려면 Ajax 비동기통신 사용 필요하다고 하심
+
+서버에 대한 부하도를 낮추기 위해 비밀번호 체크등에 대해서는 자바스크립트로 구현하는 것이 좋다고 하심
+아이디 중복 체크는? 결국 데이터베이스에서 검색을 해봐야하는것이기는 한데.. 그걸 자바스크립트상으로는 어떻게 구현 할 수 있나?
+-->

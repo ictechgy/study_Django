@@ -1,0 +1,29 @@
+<!-- 이 html파일은 다른 html파일들의 부모 html파일로서 기본적인 틀을 잡아줄 것입니다.-->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %}
+            타이틀부분도 html마다 다르게 합시다.
+        {% endblock %}
+    </title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'bs4/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bs4/js/bootstrap.min.js' %}" ></script>
+    {% block script %}
+        스크립트가 필요하다면 추가적으로 정의해주도록 한다.
+    {% endblock %}
+</head>
+<body>
+    <div class="container">  <!-- 여기까지는 강제적인 기본 틀 -->
+        {% block body %}
+            재정의가 가능한 블록부분
+
+        {% endblock %}
+    </div>
+</body>
+</html>

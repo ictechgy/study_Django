@@ -1,0 +1,62 @@
+내가 만든 댓글작성칸
+<div>
+<form action='{% url "board:view" data.id %}' method="POST">{% csrf_token %}
+    <input type="hidden" value="{{ user.username }}" name="author">
+    <input type="text" placeholder="댓글작성" name="content">
+    <button type="submit">확인</button>
+</form>
+</div>
+<br>
+
+선생님
+{% if user.is_authenticated %}
+    <form action="{% url 'board:comment_add' %}" method="POST">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <input type="hidden" name='id' value="{{ board_id }}"> 
+                        <!-- view.html에서 include할 때 with에 board_id = data.id 라고 하심. 어떠한 게시글에 대한 댓글인지
+                            알 수 있도록.  근데 그럴 필요 없이 여기서 바로 {{ data.id }} 써도 됨 with로 안넘겨도 잘 작동함-->
+                        <input type="hidden" name='author' value="{{ user.username }}">
+                        <textarea class="form-control" name="content" placeholder="댓글 작성" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="com-md-2">
+                <button class="btn btn-light" type="submit">작성</button>
+            </div>
+        </div>
+    </form>
+{% endif %}
+
+
+{% for item in comment %}
+    <div class="row">
+        <div class="col-md-2">
+            <div class="thumnail">
+                img
+            </div>
+        </div>
+        <div class="com-md-10">
+            <div class="card card-default">
+                <div class="card-header">
+                    <strong>{{ item.author }}</strong>
+                </div>
+                <div class="card-body">
+                    {{ item.content }}
+                </div>
+            </div>
+        </div>
+        {% if user.username == item.author %}
+            <div class="col-md-2">
+                <form action="{% url 'board:comment_delete' %}" method="POST">{% csrf_token %}
+                    <input type="hidden" name='id' value='{{ item.id }}'>
+                    <input type="hidden" name='board_id' value='{{ board_id }}'>
+                    <button class="btn btn-outline-danger" type="submit">삭제</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    <br>
+{% endfor %}

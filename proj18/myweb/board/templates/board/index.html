@@ -1,0 +1,83 @@
+{% extends 'layout/base.html' %}
+<!-- navigation.html은 base.html에서 include시켜놓았음-->
+
+{% block title %}게시판{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class='form-group text-right'>
+            <button class='btn btn-outline-primary' type="button" onclick=location.href='{% url "board:insert" %}'>글쓰기</button>
+        </div>
+    {% endif %}
+    <table class='table table-hover'>
+        <thead>
+            <tr class='row'>
+                <th class='col-md-1 text-center'>번호</th>
+                <th class='col-md-4 text-center'>제목</th>
+                <th class='col-md-2'>작성자</th>
+                <th class='col-md-3 text-center'>작성일</th>
+                <th class='col-md-1 text-center'>조회수</th>
+                <th class='col-md-1 text-right'>추천수</th>
+            </tr>
+        </thead>        
+        <tbody>
+            {% for record in data %}
+                <tr class='row' onclick=location.href="{% url 'board:view' record.id %}" onmouseover="style='cursor: pointer'">
+                    <td class='col-md-1 text-center'>{{ record.id }}</td>
+                    <td class='col-md-4 text-center'>{{ record.title }}</td>
+                    <td class='col-md-2'>{{ record.author }}</td>
+                    <td class='col-md-3'>{{ record.create_date|date:'Y년 m월 d일 D H시i분' }}</td>
+                    <td class='col-md-1 text-center'>{{ record.view_count }}</td>
+                    <td class='col-md-1 text-right'>{{ record.good_count }}/{{ record.bad_count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul class="pagination justify-content-center">
+            {% for page in page_range %}
+                    {% if data.number == page %}
+                        <li class="page-item active">
+                            <a class="page-link" href="{% url 'board:index' %}?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'board:index' %}?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+            {% endfor %}
+    </ul>
+        
+
+    <!-- 페이지가 5개정도씩만 나오도록 만들기-->
+    <ul class="pagination justify-content-center">
+            {% for page in range( 1, data.number + 4, 1 ) %} <!-- 왜 안되지-->
+                    {% if data.number == page %}
+                        <li class="page-item active">
+                            <a class="page-link" href="{% url 'board:index' %}?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'board:index' %}?page={{ page }}">{{ page }}</a>
+                        </li>
+                    {% endif %}
+            {% endfor %}
+    </ul>
+    <!-- 선생님은 views에서 건드리심 -->
+
+
+
+
+    <form class="form-inline" action="{% url 'board:index' %}" method="GET">
+        <div class='input-group'>
+            <input class="form-control" type="text" name='search'>
+            <div class="input-group-append">
+                <button class='btn btn-outline-secondary' type="submit">검색</button>
+            </div>
+        </div>
+    </form>
+    <!-- 검색한 것에 대해 데이터베이스에서 값을 뭐 필터로 찾아서 이쪽으로 보내는 방식으로 작동시키면 되는데
+    검색결과에 대해서 또 페이징을 해야한다거나 이러면 조금 복잡해질지도 모르겠다.
+기존 views 에 있는 함수 코드를 재활용 하는게 좋은데 어떤식으로 써야 할지.-->
+{% endblock %}
+

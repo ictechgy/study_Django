@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'bs4/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bs4/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">{{ data.title }}</h4>
+            <p>
+                작성자 : {{ data.author }}<br>
+                기간 : {{ date.start_date }} ~ {{ date.end_date }}<br>
+                <strong>위의 정보를 <i>삭제</i>하겠습니까?</strong>
+            </p>
+            <hr>
+            <form action="/vote/delete/" method="POST">{% csrf_token %}
+                <div class="text-right">
+                    <button class="btn btn-outline-danger" type="submit">확인</button>
+                    <button class="btn btn-outline-danger" type="button" onclick="location.href='/vote/'">취소</button>
+                </div>
+                <input type="hidden" name="id" value="{{ data.id }}">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

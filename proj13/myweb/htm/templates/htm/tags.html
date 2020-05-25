@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    {% autoescape off %}
+        {{ data.tag_context }}
+    {% endautoescape %}
+    <div>
+        <button type="button" onclick="location.href='/htm/tag/update/?id={{ data.id }}'">수정</button>
+        <button type="button" onclick="location.href='/htm/tag/delete/?id={{ data.id }}'">삭제</button>
+    </div>
+</body>
+</html>

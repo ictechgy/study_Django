@@ -1,0 +1,31 @@
+<table class="table table-hover">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>기간</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td onclick="location.href='{% url 'vote:check' item.id %}'"
+                        onmouseover="style.cursor='pointer'">
+                        {{ item.title }}
+                    </td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.start_date|date:'Y/m/d H:i:s' }} ~<br>
+                        {{ item.end_date|date:'Y/m/d H:i:s' }}</td>
+                    <td>
+                        <button class="btn btn-outline-success btn-sm" type="button"
+                                onclick="location.href='{% url 'vote:update' %}?id={{ item.id }}'">수정</button>
+                        <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="location.href='{% url 'vote:delete' %}?id={{ item.id }}'">삭제</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>

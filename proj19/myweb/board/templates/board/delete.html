@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ data.title }} 삭제{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">{{ data.title }}</h4>
+    <p>
+        작성자 : {{ data.author }}<br>
+        위의 정보를 <strong>삭제</strong>하겠습니까?
+    </p>
+    <hr>
+    <form action="{% url 'board:delete' %}" method="POST">{% csrf_token %}
+        <input type="hidden" name="id" value="{{ data.id }}"> <!-- 이렇게 해도 되지만 위의 action에서 url정보 뒤쪽에 ? 를 통해서 값을 넘겨줄..수 없겠구나 POST라서-->
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="submit">확인</button>
+            <button class="btn btn-outline-primary" type="button"
+                    onclick=location.href='{% url "board:index" %}'>취소</button> <!-- 또는 기존 글로 돌아가도록 만들 수도 있음 -->
+        </div>
+    </form>
+</div>
+{% endblock %}

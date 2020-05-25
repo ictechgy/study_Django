@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>투표 목록 추가 페이지</title>
+</head>
+<body>
+    <form action='/vote/insert/' method='POST'>{% csrf_token %}
+        <div><input type='text' name='title' placeholder='투표 제목'></div>
+        <div><input type='text' name='writer' placeholder='작성자'></div>  <!-- 작성자는 나중에 세션값가지고 기본적으로 생성되도록 만드는 것이 낫겠지-->
+        <div>
+            <input type="date" name='start_date'> <input type="time" name='start_time'> ~ 
+            <input type="date" name='end_date'> <input type="time" name='end_time'>
+        </div>  <!-- 근대 input 태그중에서 datetime도 있던데 크롬에서 제대로 작동이 안됨-->
+        <div><input type='text' name='contents' placeholder="항목1"></div>
+        <div><input type='text' name='contents' placeholder="항목2"></div>
+        <div><input type='text' name='contents' placeholder="항목3"></div>
+        <div><button type='button'>항목 추가</button></div>  <!-- 항목 추가 누르면 항목 더 생기는거.. 어떻게 구현?-->
+        <div><button type="submit">등록</button></div>
+    </form>
+</body>
+</html>

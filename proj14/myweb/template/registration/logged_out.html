@@ -1,0 +1,4 @@
+로그아웃 완료페이지. 로그아웃 버튼 눌렀을 시 {% url 'logout' %} 버튼을 누른건데 이는 사실 /account/logout/으로 연결시키는 버튼인거다.
+url(r'^account/', include('django.contrib.auth.urls')) 을 통해 로그아웃이 되고, 이 페이지가 사용자에게 던져진다. 
+
+<button type='button' onclick=location.href='{% url "index" %}'>홈으로</button>

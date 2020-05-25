@@ -1,0 +1,114 @@
+{% extends 'vote/super.html' %}
+
+{% block title %}
+    투표생성페이지
+{% endblock %}
+
+{% block script %}
+    <script>
+        num=1
+        function addList()
+            div = document.createElement('div')
+
+
+    </script>
+{% endblock %}
+
+
+{% block body %}
+    {% include 'vote/form.html' with address='vote:insert' %}
+
+    {% comment %} 
+    <form action="{% url 'vote:insert' %}" method="POST">{% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="text" name="title" placeholder="투표 제목">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="author" placeholder="작성자">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <input class="form-control" type="date" name="start_date">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="time" name="start_time">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="date" name="end_date">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="time" name="end_time">
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="choice" placeholder="항목 1">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="choice" placeholder="항목 2">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="choice" placeholder="항목 3">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="choice" placeholder="항목 4">
+        </div>
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="submit">저장</button>
+        </div>
+    </form> 
+    {% endcomment %}
+{% endblock %}
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'bs4/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bs4/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'vote:insert' %}" method="POST">{% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" name="title" placeholder="투표 제목">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="author" placeholder="작성자">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="date" name="start_date">
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="time" name="start_time">
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="date" name="end_date">
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="time" name="end_time">
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 1">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 2">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 3">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 4">
+            </div>
+            <div class="text-right">
+                <button class="btn btn-outline-primary" type="submit">저장</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> 
+{% endcomment %}

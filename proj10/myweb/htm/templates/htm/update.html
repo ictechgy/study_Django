@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>수정페이지</title>
+    </head>
+
+    <body>
+        <form action=/htm/tag/update/ method=POST>{% csrf_token %}
+            태그 이름 : <input type='text' name='tag_name' value="{{ data.tag_name }}"><br>
+            태그 내용 :<br>
+            <textarea name='tag_context'>
+                {{ data.tag_context }}
+            </textarea><br>
+            <button type=submit>수정완료</button>
+            <input type='hidden' value='{{ data.id }}' name=id >
+        </form>
+
+
+        
+        선생님
+        <form action="/htm/tag/update/" method="POST">{% csrf_token %}
+            <div>
+                <input name='id' value="{{ data.id }}" type="hidden"> 수정못하도록, 그리고 사용자가 볼 필요가 없는 id값
+            </div>
+            <div>태그 이름 : <input type="text" name="tag_name" value="{{ data.tag_name }}"></div>
+            <div>내용 : <br>
+                <textarea name="tag_context" cols=30 rows=10>{{ data.tag_context }}</textarea>
+            </div>
+            <div>
+                <button type="submit">저장</button>
+            </div>
+        </form>
+    </body>
+</html>

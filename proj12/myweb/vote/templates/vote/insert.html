@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>투표 목록 추가 페이지</title>
+</head>
+<body>
+    <form action='/vote/insert/' method='POST'>{% csrf_token %}
+        <div><input type='text' name='title' placeholder='투표 제목'></div>
+        <div><input type='text' name='writer' placeholder='작성자'></div>  <!-- 작성자는 나중에 세션값가지고 기본적으로 생성되도록 만드는 것이 낫겠지-->
+        <div>
+            <input type="date" name='start_date'> <input type="time" name='start_time'> ~ 
+            <input type="date" name='end_date'> <input type="time" name='end_time'>
+        </div>
+        <div><input type='text' name='contents' placeholder="항목1"></div>
+        <div><input type='text' name='contents' placeholder="항목2"></div>
+        <div><input type='text' name='contents' placeholder="항목3"></div>
+        <div><button type='button'>항목 추가</button></div>  <!-- 항목 추가 누르면 항목 더 생기는거.. 어떻게 구현?-->
+        <div><button type="submit">등록</button></div>
+    </form>
+</body>
+</html>
+
+
+선생님이 만든 코드
+<div class="container">  중앙에 좀 모아주는 class
+    <form action="/vote/insert/" method="POST">{% csrf_token %}
+        <div class="form-group">   모양 바꿔주는 class
+            <input class="form-control" type="text" name="title" placeholder="투표 제목">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="author" placeholder="작성자">
+        </div>
+
+        <div class="form-row">  하위에 들어갈 div들이 한줄에 표시되도록
+            <div class="form-group col-md-3">  3칸정도씩 차지하도록 만듬
+                <input class="form-control" type="date" name="start_date">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="time" name="start_time">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="date" name="end_date">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="time" name="end_time">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="text" name="choice" placeholder="항목 1">
+        </div>
+        <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 2">
+        </div>
+        <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 3">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="choice" placeholder="항목 4">
+        </div>  <!-- 동적으로 항목 갯수 늘리게 만드려면 스크립트 필요-->
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="submit">저장</button>
+        </div>
+    </form>
+</div>

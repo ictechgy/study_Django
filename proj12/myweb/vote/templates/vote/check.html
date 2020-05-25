@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>투표하는 페이지</title>
+</head>
+<body>
+    투표명 : {{ data1.title }}
+    투표목록<br>
+    {{ data2.text }}
+
+    <input type="hidden" value="{{ data1.id }}" name="data1_id">
+    <input type="hidden" value="{{ data2.q_id }}" name="data2_q_id">
+
+    <div>
+        <button type="button" onclick="location.href='/vote/delete/    '">삭제</button>
+    </div>
+</body>
+</html>
+
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>{{ data.title }}</h1>
+        </div>
+        <div class="text-right">
+             <h5 class="text-muted">
+                작성자 : {{ data.author }}<br>
+                기간 : {{ data.start_date|date:'Y/m/d H:i:s' }} 부터 <br>
+                {{ data.end_date|date:'Y/m/d H:i:s' }} 까지
+             </h5>
+        </div>
+        <form action="/vote/check/{{ data.id }}/" method="POST">{% csrf_token %} <!-- Question에서의 테이블 레코드 고유 id값-->
+            <div>
+                <ul class="list-group list-group-flush">
+                    {% for item in choices %}
+                        <li class="list-group-item">
+                            <input type='radio' name="choice" value="{{ item.id }}">  <!-- choices 테이블의 레코드 고유 id값 -->
+                            {{ item.text }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class = "text-right">
+                <button class="btn btn-outline-primary" type="submit">확인</button>  <!-- 항목 선택하고 확인 누르면 카운트 올려주기-->
+                <button class="btn btn-outline-primary" type="button" onclick="location.href='/vote/'">목록</button>
+            </div>
+        </form>
+    </div>
+</body>

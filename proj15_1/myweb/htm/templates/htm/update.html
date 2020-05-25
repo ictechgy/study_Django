@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form action="/htm/tag/update/" method="POST">{% csrf_token %}
+        <div>
+            <input type="hidden" name="id" value="{{ data.id }}">
+        </div>
+        <div>태그 이름 : <input type="text" name="tag_name" value="{{ data.tag_name }}"></div>
+        <div>내용 : <br>
+            <textarea name="tag_context" cols="30" rows="10">{{ data.tag_context }}</textarea>
+        </div>
+        <div>
+            <button type="submit">저장</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{% extends 'vote/layout.html' %}
+
+{% block title %}{{ block.super }} 추가{% endblock %}
+
+{% block content %}
+    {% include 'vote/form.html' with urls='vote:insert' data=date choices='    ' %}
+{% endblock %}

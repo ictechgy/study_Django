@@ -1,0 +1,19 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}글쓰기{% endblock title %}
+
+{% block content %}
+    <form action='{% url "board:insert" %}' method="POST">{% csrf_token %}
+    <!-- 새로운 방식으로 폼 작성해보기. forms.py 생성 -->
+        {% for input in forms %}
+            <div class="form-group">
+                {{ input }}
+            </div>
+        {% endfor %}
+        <div class="form-group text-right">
+            <button class='btn btn-outline-primary' type="submit">저장</button>
+        </div>
+    </form>
+    <!-- 세부적인 컨트롤은 html이 낫긴 함.. 이건 장고 기본기능이며 선택해서 쓰면 됨 
+    페이지에서 소스를 보면 그냥 html코드를 쓴것과 동일함 -->
+{% endblock content %}

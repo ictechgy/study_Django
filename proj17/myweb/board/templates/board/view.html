@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ data.title }}{% endblock title %}
+
+{% block content %}
+<h1>
+    {{ data.title }}
+</h1>
+<p>
+    {{ data.content }}
+</p>
+<div class="text-center">
+    <button class="btn btn-outline-primary" type="button">추천</button>
+    <button class="btn btn-outline-danger" type="button">비추천</button>
+</div><!-- 근데 추천 비추천에 대해서 button을 통해 POST방식으로 바로 처리가 가능한가? 그리고 추가적으로는 로그인한 사용자만 추천 비추천이 가능하도록 할 수도 있고-->
+<div class="text-right">
+    <button class="btn btn-outline-success" type="button">수정</button>
+    <button class="btn btn-outline-danger" type="button">삭제</button>
+    <button class="btn btn-outline-primary" type="button">목록</button>
+</div><!-- 수정 삭제에 대해서는 작성자만 가능하도록 해야할 것-->
+<!-- 어떤 버튼등의 제한적 작동에 대해서는 버튼이 안보이게 하는 것 뿐만이 아니라 url을 통한 접근도 제어해야 한다. -->
+<div>
+    {% include 'board/comment.html' %}
+</div>
+{% endblock %}
+
+<!-- 현재 board/comment 를 include한 것은 어떤 게시글을 보든간에 똑같은 하나의 html파일만을 보게된다.
+따라서 해당 html에서 게시글마다 게시글에 맞는 댓글값이 보이도록 해야한다.
+이를 위해 우선 게시글에 맞는 댓글을 미리 입력해보고(BoardComment에서 값을 추가하되 이 때 Board_id값에 이미 존재하는 게시글에 대한 id값 추가)
+comment.html파일 구성에 있어서 data.id 와 동일한 board_id값을 가지고 있는 댓글들만 가져와 구성되도록 해야한다.
+이를 위해서는 views에서 먼저 또 data.id와 동일한 board_id값을 가지고 있는 BoardComment 데이터베이스의 값들을 filter형태로 받아서 이 view.html로 
+보내주는 것이 선행되어야 하는것으로 보인다. 그리고 여기서 with로 값을 넘겨주고 그 값을 토대로 comment.html에서 구성되도록 해야 할 듯
+
+댓글 추가 삭제는 또 어찌 구현하며.. 삭제는 작성자만 삭제가능하도록 해야하는것과..
+이 CommentAdd와 CommentDelete에 대해 POST방식으로만 처리시키도록 하신다고 헀는데..
+-->

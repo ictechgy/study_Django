@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}로그인{% endblock %}
+
+{% block content %}
+    <form action="{% url 'login' %}" method='POST'>{% csrf_token %}
+        <!-- 위와 같이 url 역순조회 쓰면 알아서 찾아서 url 로그인 주소로 연결됨. 장고 기본기능 -->
+        <div class="form-group">
+            <input class="form-control" type='text' name="username" placeholder="아이디">  <!-- username이라고 꼭 해줘야함. 테이블의 칼럼명과 동일하게-->
+        </div>
+        <div class="form-group">  <!-- div마다 조금씩 간격 떨어뜨리는 form group class -->
+            <input class="form-control" type='password' name='password' placeholder="비밀번호">
+        </div>
+        <div class='text-right'>
+            <button class="btn btn-online-primary" type="submit">로그인</button>
+        </div>
+    </form>
+{% endblock %}
+
+<!-- 이 상태에서 admin/admin1234 로 로그인 가능하다. 로그인 url로 연결되어 로그인처리가 다 되고 알아서 결과 페이지가 return된다.
+    다만 Page not found 뜬다. 기본적으로 /accounts/profile/로 redirect시킨다.
+해당 페이지가 없으니 에러가 뜸.. 기본 redirect 위치를 바꾸자. myweb의 settings에서 변경 가능하다.-->

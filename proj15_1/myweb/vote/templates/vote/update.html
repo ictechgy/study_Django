@@ -1,0 +1,90 @@
+{% extends 'vote/super.html' %}
+
+{% block head %}
+    투표 수정페이지
+{% endblock %}
+
+{% block body %}
+    <form action="{% url 'vote:update' %}" method="POST">{% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="hidden" name="id" value="{{ data.id }}">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="title" placeholder="투표 제목" value="{{ data.title }}">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="author" placeholder="작성자" value="{{ data.author }}">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <input class="form-control" type="date" name="start_date" value="{{ data.start_date|date:'Y-m-d' }}">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="time" name="start_time" value="{{ data.start_date|date:'H:i' }}">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="date" name="end_date" value="{{ data.end_date|date:'Y-m-d' }}">
+            </div>
+            <div class="form-group col-md-3">
+                <input class="form-control" type="time" name="end_time" value="{{ data.end_date|date:'H:i' }}">
+            </div>
+        </div>
+        {% for item in choices %}
+            <div class="form-group">
+                <input class="form-control" type="text" name="choice" placeholder="항목 {{ forloop.counter }}" value="{{ item.text }}">
+            </div>
+        {% endfor %}
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="submit">수정</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% comment %}
+ <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'bs4/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bs4/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <form action="{% url 'vote:update' %}" method="POST">{% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="hidden" name="id" value="{{ data.id }}">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="title" placeholder="투표 제목" value="{{ data.title }}">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="author" placeholder="작성자" value="{{ data.author }}">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="date" name="start_date" value="{{ data.start_date|date:'Y-m-d' }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="time" name="start_time" value="{{ data.start_date|date:'H:i' }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="date" name="end_date" value="{{ data.end_date|date:'Y-m-d' }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-control" type="time" name="end_time" value="{{ data.end_date|date:'H:i' }}">
+                </div>
+            </div>
+            {% for item in choices %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="choice" placeholder="항목 {{ forloop.counter }}" value="{{ item.text }}">
+                </div>
+            {% endfor %}
+            <div class="text-right">
+                <button class="btn btn-outline-primary" type="submit">수정</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endcomment %}

@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+기존 vote/layout.html을 extends하던 것에서 template/layout/base.html로 기본 베이스 변경
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="button"
+                    onclick="location.href='{% url 'vote:insert' %}'">추가</button>
+        </div>
+    {% endif %}
+    {% include 'vote/table.html' with data=data %}
+    <!-- 이전 또는 다음페이지 이동버튼이라던지.. 아니면 페이지 번호 링크라던지 생성에 대하여..-->
+    {% comment %} <div>
+        {% if data.has_previous() == false %}
+            <button type="button" onclick=location.href="{% url 'vote:index' %}?page=pre" disabled>이전</button>
+        {% else %}
+            <button type="button" onclick=location.href="{% url 'vote:index' %}?page=pre">이전</button>
+        {% endif %}
+        현재 : {{ data.number }}
+        {% if data.has_next == false %}
+            <button type="button" onclick=location.href="{% url 'vote:index' %}?page=next" disabled>다음</button>
+        {% else %}
+            <button type="button" onclick=location.href="{% url 'vote:index' %}?page=next">다음</button>
+        {% endif %}
+    </div>
+    오류뜨네 
+     {% endcomment %}
+    {% for idx in page %}
+        <a href='{% url "vote:index" %}?page={{ idx }}'>{{ idx }}</a>&nbsp;
+    {% endfor %}
+
+
+{% endblock %}

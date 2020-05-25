@@ -1,0 +1,104 @@
+{% extends 'vote/super.html' %}
+
+{% block title %}
+    메인 투표목록 페이지
+{% endblock %}
+
+{% block body %}
+    <div class="text-right">
+        <button class="btn btn-outline-primary" type="button"
+                onclick="location.href='{% url 'vote:insert' %}'">추가</button>
+    </div>
+    
+    {% include 'vote/table.html' data=data %}
+    view로부터 받아왔던 것을 다시 또 보내서 페이지 구성시키기
+    
+    
+    {% comment %} 
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>기간</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td onclick="location.href='{% url 'vote:check' item.id %}'"
+                        onmouseover="style.cursor='pointer'">
+                        {{ item.title }}
+                    </td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.start_date|date:'Y/m/d H:i:s' }} ~<br>
+                        {{ item.end_date|date:'Y/m/d H:i:s' }}</td>
+                    <td>
+                        <button class="btn btn-outline-success btn-sm" type="button"
+                                onclick="location.href='{% url 'vote:update' %}?id={{ item.id }}'">수정</button>
+                        <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="location.href='{% url 'vote:delete' %}?id={{ item.id }}'">삭제</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+    {% endcomment %}
+
+{% endblock %}
+
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'bs4/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bs4/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="button"
+                    onclick="location.href='{% url 'vote:insert' %}'">추가</button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>기간</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td onclick="location.href='{% url 'vote:check' item.id %}'"
+                            onmouseover="style.cursor='pointer'">
+                            {{ item.title }}
+                        </td>
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.start_date|date:'Y/m/d H:i:s' }} ~<br>
+                            {{ item.end_date|date:'Y/m/d H:i:s' }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" type="button"
+                                    onclick="location.href='{% url 'vote:update' %}?id={{ item.id }}'">수정</button>
+                            <button class="btn btn-outline-danger btn-sm" type="button"
+                                    onclick="location.href='{% url 'vote:delete' %}?id={{ item.id }}'">삭제</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html> 
+{% endcomment %}

@@ -1,0 +1,386 @@
+<!DOCTYPE html>  이제 html문서로 쓰인다는 알림
+<html> 이 태그를 사용하여 html의 영역을 알린다.
+    <head> html은 크게 head부분과 body부분으로 나뉜다.
+        <title>제목을 나타내는 부분. 작성하지 않으면 url주소가 출력됨</title>
+    </head>
+<body>문서의 구조를 이제 잡는 부분이다.
+    다양한 양식과 형식의 html태그들을 쓰면 된다.
+
+    문서상의 제목을 나타내는 부분(굵은 글씨로 표기됨) 1~6까지 있다.
+    <h1>제목 1</h1>
+    <h2>제목 2</h2>
+    <h3>제목 3</h3>
+    <h4>제목 4</h4>
+    <h5>제목 5</h5>
+    <h6>제목 6</h6>
+
+    <p>이 p태그는 단락구분용 태그이다.</p> 워드에서 스타일을 지정하고 글을 작성하다보면 글이 한줄을 넘어가면 자동으로 다음줄에 
+    써지는데, 이렇게 써지는 줄간격과, 내가 직접 엔터를 쳐서 단락을 따로 만드는 경우의 줄 간격이 달라진다. 워드는 이렇게 단락을 자동으로
+    구분해준다. 
+
+    <p>문서단락1</p>
+    <p>문서단락2</p>
+
+    <a>링크 이동 태그 a</a>
+    링크이동 태그에는 외부링크로 이동시키냐, 내부로 이동시키느냐에 따라 작성방법이 조금 달라진다.
+    우리 서버내의 페이지가 아닌 다른 서버(네이버나 구글 등)로 이동시킬 때 외부 링크 이동
+    우리 서버내의 다른 페이지나 앱으로 이동시킬 때 쓰는 것이 내부 링크 이동
+
+    태그 안에 속성 attribute를 지정해주면 된다
+    <a href="http://www.naver.com/">url주소에서 프로토콜정보와 도메인, path등 전부 기입</a>
+    <a href="/">내부링크는 path만 적어주면 된다. /는 꼭 필요하다. 슬래시는 main페이지 즉, 도메인까지를 의미하고 있음</a>
+
+    페이지에 표시되는 내용은 여기에 쓰는 것과는 상관 없이 태그에 영향을 받는다.
+    즉 여기서 아무리 개행을 많이 해도 다 붙여서 써진다.
+    따라서 우리는 별도의 태그를 사용해야한다. p태그는 자동개행이 있지만 a태그는 개행이 없다.
+    개행태그 대표적으로는 <br>이 있다. 
+
+    division, 영역구분태그. div태그도 자동으로 개행을 시켜준다.
+    <div>
+        보통 div를 많이 쓴다. 특정 영역을 구분시키고 따로 CSS Style등을 적용시켜주기 위해..
+
+    </div>
+
+    ul태그 안에 자식태그가 있다. ul태그 단독으로는 못쓴다. unordered list 즉, 순서가 없는 목록
+    그리고 그 안에는 li라는 list태그 사용
+    <ul>   
+        <li>순서 없는 목록</li>
+        <li>순서 없는 목록</li>
+    </ul>
+
+    순서있는 리스트
+    <ol>
+        <li>순서 있는 목록</li>
+        <li>순서 있는 목록</li>
+    </ol>
+
+    속성적용
+    <ol type='A'>
+        <li>목록</li>
+        <li>목록</li>
+    </ol>
+
+    <ul type='square'>
+        <li>목록</li>
+        <li>목록</li>
+    </ul>
+
+    <ul type='circle'>
+            <li>목록</li>
+            <li>목록</li>
+    </ul>
+    
+    <ol type='i' start='10'> 로마자 표기(italic) 및 시작숫자 지정
+        <li>목록</li>
+        <li>목록</li>
+    </ol>
+
+    표를 만드는 태그 table. 이 내부에는 table row(열), td(셀), table head(제목)등의 자식태그가 존재한다.
+    <table border='1'> 기본적으로 줄로 구분안되어있으므로 border속성 추가 기입
+        <tr>
+            <td>1행1열</td><td>1행2열</td><td>1행3열</td>
+        </tr>
+        <tr>
+            <td>2행1열</td><td>2행2열</td><td>2행3열</td>
+        </tr>
+        <tr>
+            <td>3행1열</td><td>3행2열</td><td>3행3열</td>
+        </tr>
+    </table>
+
+    태그들 중에는 열고 닫는 태그 둘다 존재하기도 하지만 열린태그만 존재하는 경우가 있다.
+    이미지 추가하기 img태그 쓴다. 역시나 외부이미지를 추가하느냐 내부이미지를 추가하느냐에 따라 사용형식이 나뉜다.
+    <img src='http://thumb.photo.naver.net/data9/2005/11/11/238/sammy2.jpg'>
+    서버 안의 내부 이미지를 쓰고자 한다면.. 이미지 관리 폴더를 따로 만들어야한다. 마치 template폴더를 만들었듯이
+    htm App의 디렉토리 하위에 static 디렉토리 생성. 그 다음에 
+    <img src='/static/dog.jpg'>
+
+    추가적으로 크기속성도 사용
+    <img src='/static/dog.jpg' width="200" height="200">
+    만약 크기옵션 하나만 쓰면 비율은 알아서 맞춰서 조정됨. 예를들어 높이를 100으로 했을 때 기본 이미지가 높이:너비 = 1:3이라면
+    너비는 자동으로 300이 됨
+    만약 다른 곳에 저장되어있는 이미지를 쓰고자 한다면 경로는 어떻게 작성?
+    
+
+    어떤 내용이 들어가는 필드를 생성하기
+    <fieldset>
+        <legend>제목</legend>
+        필드셋 내용 입력
+    </fieldset>
+
+    html태그중에는 부모태그와 자식태그가 존재하는 경우가 있다. 상호 의존성이 있는 경우가 있다.(ol과 li 등)
+
+    태그안에 태그가 들어가는 중첩태그가 가능하다.
+
+
+    input태그도 열린태그만 존재한다.
+    사용자가 다양한 데이터를 입력가능하도록 만들어주는 양식 제공 태그
+    어떠한 종류의 데이터를 입력받느냐에 따라 타입을 나눠준다.
+    <div>
+        <input type='text'>보통 검색창이나 아이디 입력창으로 쓰임<br>
+        <input type='password'>패스워드 입력으로 쓰임. 입력하는 값이 무엇인지 볼 수 없다.<br>
+        <input type='date'>날짜를 입력가능하게 해주는 타입<br>
+        <input type='time'>시간 입력가능한 타입<br>
+        브라우저에 따라서 date나 time이 잘 나오지 않을 수 있다. 익스플로러에서는 그냥 text인풋칸으로 뜸
+    </div>
+
+    브라우저에 따라서 html태그 및 속성이 지원이 되지 않는 경우가 있다.
+    왠만하면 모든 브라우저에서 작동하는 태그를 쓰되 어쩔수 없는 경우 이 페이지는 ~브라우저에 최적화되어있다 알려주기
+
+    체크박스 타입(설문조사나 회원가입시 약관 동의, 취미조사 등) 다중선택 가능
+    <input type="checkbox">
+    <input type="checkbox">
+    <input type="checkbox">
+
+    여러 항목 중 하나만 선택가능하게 할 때 주로 쓰는 radio(단 name을 같게 설정해줘야 하나만 선택가능)
+    <input type="radio">
+    <input type="radio">
+    <input type="radio">
+    위의 상태는 다 선택이 가능하다.
+
+
+    <input type="radio" name='rdo'>
+    <input type="radio" name='rdo'>
+    <input type="radio" name='rdo'>
+    이렇게 만들어주면 하나의 rdo라는 것에 대해 세개 중 하나만을 선택할 수 있게 만들어진다.
+
+    체크박스에서도 name을 지정해서 어떤 항목에 대해 체크를 한 것인지 써주는게 기본
+    <input type="checkbox" name='hobby'>
+    <input type="checkbox" name='hobby'>
+    <input type="checkbox" name='hobby'>
+    취미에 대한 다중선택
+
+
+    버튼양식 지원
+    <div>
+        <input type='button'><br>
+        <input type='button' value='버튼'><br>
+        <input type='submit'><br>
+    </div>
+
+    button은 이 파일 안에서 특정기능을 수행하도록 하는 버튼.(자바스크립트 생성 필요)
+    submit은 제출이라고 해서 클릭시 앞에서 입력한 여러 데이터들을 우리 서버로 제출할 수 있게끔 해주는 역할을 가지고 있다.
+    단, submit을 쓸 때도 앞의 양식들은 form태그 안에 있어야 submit을 통해 전송할 수 있다. 아무 데이터나 막 다 보내지 않기 위해.
+    
+    그리고 서버의 어느 부분에 전송시켜줄 것이냐, 어느 함수로 전달시켜 줄 것이냐 위치도 지정해줘야한다. action 속성 사용 
+    method속성을 사용해서 값을 전송시켜주는 방식을 정해줄 수 있다. 기본적으로는 get이다.
+    <form action="/htm/submit/" method='POST'>
+        <input type='text'><br>
+        <input type='submit'><br>
+    </form>
+
+    Client가 Server로 데이터를 요구 할 때 Http Request를 하는데 그 때 서비스 요청방식은 개발자가 지정한다.
+    get으로 서비스를 요청하게 할 것인지, post방식으로 서비스를 요청시킬 것인지
+    -> bbq 주문페이지에서 get방식이였다보니까 사용자 정보가 다 노출됨
+
+
+    <form action="/htm/submit/" method='GET'>
+        <input type='text'><br>
+        <input type='submit'><br>
+    </form>
+    지금 그냥 버튼 누르면 에러뜬다. submit URL path를 찾지 못해 오류가 뜬다.
+    보냈는데 받는 사람도 없고 내게 뭘 던져주는 사람도 없고..
+
+    그럼 저것도 뭐 URL Dispatcher로 만들어줘야 하는가 아니면 그냥 submit만 만들어주면 되나
+
+    button태그는 따로 존재한다. input태그와는 다르게 열린태그 닫힌태그 다 존재한다.
+    무슨 버튼인지 써주려면 value속성이 아닌 시작태그와 끝태그 사이에 값을 넣어주면 된다.
+    <button type='button'>버튼</button>
+    <button type='submit'>전송</button>
+    나중에는 button태그를 주로 쓸 것이다.input은 CSS 디자인 적용 한계가 있다.
+    button태그는 다양한 CSS Style 적용 가능
+
+    선택박스
+    <select>
+        <optgroup>선택</optgroup>
+        <option>옵션1</option>
+        <option>옵션2</option>
+        <option>옵션3</option>
+    </select>
+
+    text입력창. cols와 rows로 입력칸 크기 정할 수 있다.
+    <textarea cols="80" rows="20"></textarea>
+    cols는 너비, rows는 높이
+
+
+    <p>
+    선생님과 동일하게 만들기
+    </p>
+    <p></p><p></p>
+
+    <ul>
+        <li><a href="/htm/tag/hn/">hn</a></li>
+        <li><a href="/htm/tag/div/">div</a></li>
+        <li><a href="/htm/tag/a/">a</a></li>
+        <li><a href="/htm/tag/p/">p</a></li>
+        <li><a href="/htm/tag/ul/">ul</a></li>
+        <li><a href="/htm/tag/ol/">ol</a></li>
+        <li><a href="/htm/tag/table/">table</a></li>
+        <li><a href="/htm/tag/fieldset/">fieldset</a></li>
+        <li><a href="/htm/tag/img/">img</a></li>
+        <li><a href="/htm/tag/input/">input</a></li>
+        <li><a href="/htm/tag/select/">select</a></li>
+        <li><a href="/htm/tag/textarea/">textarea</a></li>
+        <li><a href="/htm/tag/form/">form</a></li>
+        <li><a href="/htm/tag/button/">button</a></li>
+        <li><a href="/htm/tag/video/">video</a></li>
+    </ul>
+    이 페이지를 사용자에게 넘기면 사용자는 저 페이지 중에서 아무 버튼이나 클릭한다.
+    그러면.. 저기 써있는 url을 우리에게 요구 할 것이고 그건 또 urlDispatcher에서 분석해야겠지. 즉 저 패턴을 다 써줘야 할 것
+    즉, 패턴을 전부 써주고 views의 각기 다른 함수가 동작되도록 한 다음에 각기 다른 html파일이 동작되게 만들던가
+    아니면 path정보를 넘겨받아서 그 path에 따라 함수동작이 다르게 만들던가..
+    (path정보를 함수에서 받고, 그걸 또 그대로 template에 넘겨준 뒤에 하나의 html파일에서, 넘겨받은 path에 따라 서로 다른 페이지구성이
+    되도록 하든지) -> 이게 나을 듯.
+    
+    선생님은 위와 같이 하시긴 했는데, url패턴을 여러개 더 만들고 연결되는 함수를 또 따로 만들고, 실행되는 html파일을 여러개 만드심
+
+    다중커서는 Alt
+    다중단어변경은 Ctrl+D
+
+    선생님은 리스트를 만들 때 for문 사용하심
+     { % for tag in tag_list % }  
+        <li><a href="htm/tag/{{ tag }}/"></a></li>
+
+    view에 있는 mainIndex함수에서 딕셔너리 값을 같이 넘겨줌
+    def mainIndex(request):
+        context = {
+            'tag_list':(
+                'hn', 'a'
+            )
+        }
+        return render(request, 'htm/index.html', context)
+
+        이 다음에 url패턴 생성을 하는데.. 패턴도 여러개 만들면 된다.
+        패턴에 따라 작동하는 함수도 여러개, 그리고 이에 따른 html파일도 여러개
+
+        하지만 이건 너무 많이 만들어야 한다.
+        따라서 패턴에서 정규표현식 사용(나처럼)
+        그리고 path정보를 함수 하나에 인자로서 전달을 함
+
+        그리고 함수를 아래와 같이 작성하심
+        def htmTag(request, tag):
+        return render(request, 'htm/{}.html'.format(tag))
+        이렇게 하고 각기 맞는 페이지들을 여러개 생성
+
+
+
+
+        
+
+        2018-06-18
+        <form action='/htm/tag/' method='GET'>
+            <input type='text' name='search'>
+            <button type='submit'>검색</button>
+        </form>
+        현재는 /htm/tag/에 해당하는 url 패턴을 만들어주지 않았으므로 page not found가 뜬다. 
+        사용자가 아무값이나 입력하고 검색을 누르면 http://127.0.0.1:8000/htm/tag/?search=sadasd 라는 url을 요구하게 된다.
+        사용자가 값을 넘겨준 것에 대해 그냥 활용하지 않고 /htm/tag/ 페이지를 띄울 수도 있긴 하다.
+        urls.py에서 /htm/tag/에 대한 패턴을 만들고 함수로 연결시킴. views.py에서 함수를 만듬
+
+
+
+
+
+        2018-06-19
+        {{ data }}
+        이렇게 가져오고 출력해보면 [<htmTagTable: htmTagTable><htmTagTable: htmTagTable>] 이라고만 html파일에 출력됨
+        데이터베이스의 모든 내용을 가져오기는 했는데 이상하게 실질적 내용이 보이지는 않는다.
+        리스트형식으로 받아와진다. 따라서 for문 사용
+        
+        <ul>
+            {% for item in data %}
+            <li>
+                {{ item }}
+            </li>
+            {% endfor %}
+        </ul>
+        하지만 여전히 실질적 내용이 보이지는 않는다.
+        하나의 object당 한 행을 의미하는데 한번에 다 보여주지는 못하는 것 같다.
+        따라서 각각의 행당 칼럼을 하나씩 뽑아와야 하는 것 같다.
+
+
+        <ul>
+            {% for item in data %}
+            <li>
+                {{ item.tag_name }}
+            </li>
+            {% endfor %}
+        </ul>
+        이렇게 하면 각각의 행에서 tag_name에 해당하는 칼럼값만 뽑아오게 됨
+        
+
+
+        2018-06-20
+        <div>
+            <button type="button" onclick="location.href='/htm/tag/add/'">추가</button>
+        </div>
+        버튼 클릭시 이동시켜주도록 하는 속성인 onclick
+        그리고 클릭시 이동 목적지를 location으로 지정
+        이제 url패턴을 만들어줘야 한다.
+
+
+
+
+
+        2018-06-22
+        <head>
+            <title></title>
+            장고에서는 외부 모듈을 쓰기 위해서 from import를 썼듯이, html에서는 이 헤드부분에 css나 Js등을 쓰겠다는 말을 해둬야 한다.
+            <link> CSS 부트스트랩을 쓰기 위한 구문
+            <script></script> 자바스크립트를 쓰기 위한 구문
+
+            {% load static%} 스태틱파일들을 쓰겠다고 미리 말하기
+            <link type='text/css' rel='stylesheet' href="{% static 'bs4/css/bootstrap.min.css'%}"> link는 css파일을 불러오기 위해 쓰는 것
+            사용할 파일 경로를 써주자
+            <script type='text/javascript' src="{% static 'bs4/js/bootstrap.min.js' %}"></script>
+            이렇게만 해도 body에 들어간 내용들이 조금 바뀐다. 기본 부트스트랩 디자인이 적용됨
+        </head>
+            
+        <body>
+            더 다양한 부트스트랩 디자인을 적용하고 싶다면 속성을 더 추가해서 사용해야 한다. 
+            <button class="btn btn-primary" type='button' onclick="">추가</button>
+            부트스트랩에 미리 정의되어있는 것을 가져다 쓰기위한 class 속성
+            구글에 부트스트랩 검색을 하면 해당 관련 웹링크가 있으며 그곳에 들어가보면 Documentation이 있는데 
+            부트스트랩에 어떤 클래스가 있고 그것을 적용시켰을 때 어떻게 결과가 나오는지 그런 것들이 나와있다.
+            왼쪽 목록에 Components 안에 button 목록을 클릭해보면 맨 위에 결과 예시가 있고 그 아래에 클래스 적용법이 있다.
+            쉽고 간편하게 디자인을 적용할 수가 있다.
+            CSS나 JS, HTML은 오류가 뜨지 않는다. 오타 주의
+
+            <div class="container">
+                가나다라마바사
+                왼쪽에 조금 여백이 생기게 되는 class입니다.
+            </div>
+            <input class="form-control" type="text" name="search">
+            인풋태그가 한 화면을 가득 채우게 된다. 따라서 사이즈조절이 필요하다.
+            
+            <div class="form-row align-item-center">
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" name="search">
+                </div>
+                <div class="col-auto">
+                    <button type='submit'>검색</button>
+                </div>
+            </div>
+            크기조절 속성 cols쓰면 되지 않나? 일정 픽셀?크기 또는 브라우저상 퍼센트 크기 지정할 수 있던 걸로 기억
+            align 속성!!
+
+            class : css를 적용 시키기 위한 태그 속성. 어떤 것을 쓸 것인지 지정해줘야 한다.
+            div는 영역을 분리시켜주는 것이다. 한줄한줄씩. 근데 form-row를 적용시켜주면 div가 영역을 분리시켜줄 때
+            한 줄 안에 div영역이 여러개 생성될 수 있도록 도와준다.
+            원래 div는 한 줄이였는데 얼마만큼의 간격으로 영역을 차지하게 만들 것이냐 해서 그 하위의 div에 속성을
+            추가 한 것이다. 한 줄을 12개로 나누어서 3개만 점유하도록 col-sm-3로 지정하고
+            col-auto는 나머지는 니가 알아서 해라 라는 속성값이다. 따라서 검색버튼은 나머지 공간을 전부 다 점유하게 됨
+
+            input type에 있는 form-control 이라고 있는 것은 그냥 디자인을 적용시켜 주는 것임
+
+            이렇게 페이지에 어떤 디자인을 적용시키고 싶다면 그 디자인을 직접 만들 수도 있지만 다른 사람이 만들어놓은
+            CSS 라이브러리인 부트스트랩을 다운받아서 적용시킬 수 있다.
+
+            class이름들은 대충 지어진게 아니라 어떤 의미를 가지고 작성된 것임. center라는 class가 있으면
+            right나 left등도 보통은 있음
+
+            CSS는 디자이너들이 하는 부분
+        </body>
+</body>
+
+</html>

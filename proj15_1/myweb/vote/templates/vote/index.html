@@ -1,0 +1,124 @@
+{% extends 'vote/super.html' %}
+
+{% block title %}
+    메인 투표목록 페이지
+{% endblock %}
+
+{% block body %}
+    <div class="text-right">
+        <button class="btn btn-outline-primary" type="button"
+                onclick="location.href='{% url 'vote:insert' %}'">추가</button>
+    </div>
+    
+    {% include 'vote/table.html' data=data %}
+    view로부터 받아왔던 것을 다시 또 보내서 페이지 구성시키기
+    
+    
+    {% comment %} 
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>기간</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td onclick="location.href='{% url 'vote:check' item.id %}'"
+                        onmouseover="style.cursor='pointer'">
+                        {{ item.title }}
+                    </td>
+                    <td>{{ item.author }}</td>
+                    <td>{{ item.start_date|date:'Y/m/d H:i:s' }} ~<br>
+                        {{ item.end_date|date:'Y/m/d H:i:s' }}</td>
+                    <td>
+                        <button class="btn btn-outline-success btn-sm" type="button"
+                                onclick="location.href='{% url 'vote:update' %}?id={{ item.id }}'">수정</button>
+                        <button class="btn btn-outline-danger btn-sm" type="button"
+                                onclick="location.href='{% url 'vote:delete' %}?id={{ item.id }}'">삭제</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+    {% endcomment %}
+
+{% endblock %}
+
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Document</title>
+    {% load static %}
+    <link type="text/css" rel="stylesheet" href="{% static 'bs4/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bs4/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="text-right">
+            <button class="btn btn-outline-primary" type="button"
+                    onclick="location.href='{% url 'vote:insert' %}'">추가</button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>기간</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td onclick="location.href='{% url 'vote:check' item.id %}'"
+                            onmouseover="style.cursor='pointer'">
+                            {{ item.title }}
+                        </td>
+                        <td>{{ item.author }}</td>
+                        <td>{{ item.start_date|date:'Y/m/d H:i:s' }} ~<br>
+                            {{ item.end_date|date:'Y/m/d H:i:s' }}</td>
+                        <td>
+                            <button class="btn btn-outline-success btn-sm" type="button"
+                                    onclick="location.href='{% url 'vote:update' %}?id={{ item.id }}'">수정</button>
+                            <button class="btn btn-outline-danger btn-sm" type="button"
+                                    onclick="location.href='{% url 'vote:delete' %}?id={{ item.id }}'">삭제</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html> 
+{% endcomment %}
+
+
+
+
+2018-07-02
+
+{% extends 'layout/base.html' %}  기존의 extends 'vote/super.html' 였던 것을 이걸로 바꿈. 네비게이션 바 등 따라올 수 있도록 하기 위해.
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="text-right">
+        <button class="btn btn-outline-primary" type="button" onclick=location.href='{% url "vote:insert" %}'>추가</button>
+    </div>
+{% endif %}
+{% include 'vote/table.html' with data=data %}
+{% endblock %}
+
+이제 로그인한 사용자는 추가버튼이 보이지만 로그인하지 않은 사용자는 해당 버튼이 보이지 않는다.
+하지만 이렇게만 하면 url자체는 살아있기 때문에 로그인하지 않은 사용자가 url창에 /vote/insert/ 를 입력하면 투표 추가페이지로 연결이 된다.
+따라서 투표 추가페이지를 넘겨주는 해당 views 함수를 손봐야 한다.

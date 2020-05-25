@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <form action="/htm/tag/delete/" method="POST">{% csrf_token %}
+        <div>
+            <input name='id' value="{{ data.id }}" type="hidden"> 
+        </div>
+        <div>태그 이름 : {{ data.tag_name }}</div>
+        <div>내용 : <br>
+            <p>
+            {{ data.tag_context }}
+            </p>
+        </div>
+        <div>
+            <button type="submit">삭제 확인</button>
+        </div>
+    </form>
+</body>
+
+</html>

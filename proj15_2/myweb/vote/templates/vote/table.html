@@ -1,0 +1,37 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>기간</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td {% if user.is_authenticated %}onclick="location.href='{% url 'vote:check' item.id %}'"
+                    onmouseover="style.cursor='pointer'" {% endif %} >
+                    {{ item.title }}
+                </td>
+                <td>{{ item.author }}</td>
+                <td>{{ item.start_date|date:'Y/m/d H:i:s' }} ~<br>
+                    {{ item.end_date|date:'Y/m/d H:i:s' }}</td>
+                <td>
+                    {% if user.username == item.author %}  <!-- 만약에, 로그인한 사용자 id와 작성자 id값이 같다면.. -->
+                    <button class="btn btn-outline-success btn-sm" type="button"
+                            onclick="location.href='{% url 'vote:update' %}?id={{ item.id }}'">수정</button>
+                    <button class="btn btn-outline-danger btn-sm" type="button"
+                            onclick="location.href='{% url 'vote:delete' %}?id={{ item.id }}'">삭제</button>
+                    {% endif %}
+                    <button type="button" class="btn btn-outline-info btn-sm" 
+                            onclick=location.href='{% url "vote:confirm" item.id %}'>결과보기</button>
+                    <!-- 이렇게만 하면 /vote/update/?id=1 이렇게 접근시 id값 1인 글 수정이 가능해짐 따라서 해당 함수 수정 필요-->
+                    <!-- 닉네임 체계를 갖추지는 않았지만 닉네임부분도 생기게 된다면 회원가입부터 해서 신경써야 할 부분이 조금 더 늘어날 듯-->
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

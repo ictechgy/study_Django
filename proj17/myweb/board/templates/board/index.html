@@ -1,0 +1,50 @@
+{% extends 'layout/base.html' %}
+<!-- navigation.html은 base.html에서 include시켜놓았음-->
+
+{% block title %}게시판{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class='form-group text-right'>
+            <button class='btn btn-outline-primary' type="button" onclick=location.href='{% url "board:insert" %}'>글쓰기</button>
+        </div>
+    {% endif %}
+    <table class='table table-hover'>
+        <thead>
+            <tr class='row'>
+                <th class='col-md-1 text-center'>번호</th>
+                <th class='col-md-4 text-center'>제목</th>
+                <th class='col-md-2'>작성자</th>
+                <th class='col-md-3 text-center'>작성일</th>
+                <th class='col-md-1 text-center'>조회수</th>
+                <th class='col-md-1 text-right'>추천수</th>
+            </tr>
+        </thead>        
+        <tbody>
+            {% for record in data %}
+                <tr class='row' onclick=location.href="{% url 'board:view' record.id %}" onmouseover="style='cursor: pointer'">
+                    <td class='col-md-1 text-center'>{{ record.id }}</td>
+                    <td class='col-md-4 text-center'>{{ record.title }}</td>
+                    <td class='col-md-2'>{{ record.author }}</td>
+                    <td class='col-md-3'>{{ record.create_date|date:'Y년 m월 d일 D H시i분' }}</td> <!-- 필터 안쓰고 그냥 출력해도 됨-->
+                    <td class='col-md-1 text-center'>{{ record.view_count }}</td>
+                    <td class='col-md-1 text-right'>{{ record.good_count }}/{{ record.bad_count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form class="form-inline" action="{% url 'board:index' %}" method="GET">
+        <div class='input-group'>
+            <input class="form-control" type="text" name='search'>
+            <div class="input-group-append">
+                <button class='btn btn-outline-secondary' type="submit">검색</button>
+            </div>
+        </div>
+    </form>
+    <!-- 검색버튼을 만드셨는데 /board/index/ 로 GET방식 연결되도록 만드심
+    즉 검색어가 url parameter를 통해(/board/index/?search= ) boardIndex함수로 가도록 만들고 해당 함수에서 request.GET.get('search')받아서
+    데이터베이스에서 일치하는 값을 찾게 한 뒤 data변수에 다시 담아서 이 페이지를 보도록 만들면 될 듯.
+    물론 뭐 이 메인페이지에 처음 접근한다거나 다른 페이지보려고 한다거나 그런 경우에는 검색을 한게 아니니까 다르게 작동하도록 하면 되고.
+    -->
+{% endblock %}
+

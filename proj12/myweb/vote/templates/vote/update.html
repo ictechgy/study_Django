@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>수정페이지</title>
+</head>
+<body>
+    POST로 보낼 때에는 url에 값을 담아서 보낼 수 없다. 즉 parameter를 쓸 수가 없음. 그냥 url뒤에 값을 붙여서 보냄으로서 urlDispatcher에서 함수의 매개변수로
+    데이터를 전송하는 방식은 가능하지만...
+    <div class="container">  
+            <form action="/vote/update/" method="POST">{% csrf_token %}
+                <div>
+                    <input type="hidden" name="id" value="{{ data.id }}">
+                </div>
+
+                <div class="form-group">   
+                    <input class="form-control" type="text" name="title" placeholder="투표 제목" value="{{ data.title }}">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="author" placeholder="작성자" value="{{ data.author }}">
+                </div>
+        
+                <div class="form-row">  
+                    <div class="form-group col-md-3">  
+                        <input class="form-control" type="date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
+                    </div>                           <!-- 날짜 및 시간 값데이터 그냥 넣을 수 없음. 형식 다시 맞춰줘야 함-->
+                <!-- 시간데이터 현재 '2018년 06월 21일 오후 1시 20분' 이런 형태로 되어있음
+                    이걸 다시 date와 time부분으로 쪼개고, 2018-06-21 과 13:20 이런 형태로 양식을 변경해줘야 된다. 
+                    단 시간에 있어서 오전 오후는 만들지 않고 H:i로 해도 된다. 아니면 a h:i 이렇게 해도 되나? 아니면 안되나
+                -->
+                    <div class="form-group col-md-3">     
+                            <input class="form-control" type="time" name="start_time" value="{{ start_date|date:'H:i' }}">
+                    </div>
+                    <div class="form-group col-md-3">
+                            <input class="form-control" type="date" name="end_date" value="{{ end_date|date:'Y-m-d' }}">
+                    </div>
+                    <div class="form-group col-md-3">
+                            <input class="form-control" type="time" name="end_time" value="{{ end_date|date:'H:i' }}">
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="choice" placeholder="항목 1" value="{{ choices.0.text }}">
+                    </div>
+                    <div class="form-group">
+                            <input class="form-control" type="text" name="choice" placeholder="항목 2" value="{{ choices.1.text }}">
+                    </div>
+                    <div class="form-group">
+                            <input class="form-control" type="text" name="choice" placeholder="항목 3" value="{{ choices.2.text }}">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="choice" placeholder="항목 4" value="{{ choices.3.text }}">
+                    </div>  
+                    <div class="text-right">
+                        <button class="btn btn-outline-primary" type="submit">저장</button>
+                    </div>
+                    
+
+                항목표시를 반복문으로
+                {% for item in choices %}
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="choice" placeholder="항목 {{ forloop.counter }}" value="{{ item.text }}">
+                    </div>
+                {% endfor %}
+                    forloop.counter는 자연증가 숫자를 만들어준다.
+            </form>
+    
+</body>
+</html>

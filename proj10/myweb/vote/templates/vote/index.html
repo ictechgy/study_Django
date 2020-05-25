@@ -1,0 +1,22 @@
+<!DOCTYPE html>    <!-- 아 맞아 이거 꼭 써야지-->
+
+<html>
+<head>
+    <title>투표가능 목록 페이지</title>
+</head>
+<body>
+    <table border=1>
+        <tr>
+            <th>글번호</th><th>투표 제목</th><th>투표 시작일자</th><th>투표 종료일자</th>
+        </tr>
+        <!-- 구체적 글의 목록을 보여주는 것은 데이터베이스의 값을 가져와서 반복문 출력 필요-->
+        {% for line_data in data %}
+            <tr>
+                <td>{{ line_data.id }}</td><td><a href="">{{ line_data.title }}</a></td><td>{{ line_data.start_date }}</td><td>{{ line_data.end_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button type='button' onclick='location.href="/vote/insert/"'>투표 추가</button>
+</body>
+</html>
+

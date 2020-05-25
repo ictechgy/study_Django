@@ -1,0 +1,29 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}{{ data.title }}{% endblock title %}
+
+{% block content %}
+<h1>
+    {{ data.title }}
+</h1>
+<p>
+    {% autoescape off %} <!-- 이미지파일 추가했다면 기본적으로 태그로만 소스경로?가 보이는데 그러한 상황을 막기 위하여 -->
+    {{ data.content|linebreaksbr }} <!-- 작성자가 글을 개행하면서 작성한 경우 정상적으로 보이도록 하기 위해서-->
+    {% endautoescape %}
+</p>
+<div class="text-center">
+    <button class="btn btn-outline-primary" type="button" onclick=location.href="{% url 'board:good_bad' data.id %}?type=good">추천[{{ data.good_count }}]</button>
+    <button class="btn btn-outline-danger" type="button" onclick=location.href="{% url 'board:good_bad' data.id %}?type=bad">비추천[{{ data.bad_count }}]</button>
+</div>
+<div class="text-right">
+    {% if user.username == data.author %}
+    <button class="btn btn-outline-success" type="button" onclick=location.href="{% url 'board:update' %}?id={{ data.id }}">수정</button>
+    <button class="btn btn-outline-danger" type="button" onclick=location.href="{% url 'board:delete' %}?id={{ data.id }}">삭제</button>
+    {% endif %}
+    <button class="btn btn-outline-primary" type="button" onclick=location.href="{% url 'board:index' %}">목록</button> <!--location.back() 어떻게 구현하더라-->
+</div>
+<hr>
+<div>
+    {% include 'board/comment.html' with comment=comment board_id=data.id%}  <!-- with로 값 안보내줘도 잘만 되네 -->
+</div>
+{% endblock %}

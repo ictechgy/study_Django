@@ -1,0 +1,19 @@
+<!--
+    더하기 계산을 위한 Web Page
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form action="/htm/calc/" method="GET">
+        <div><input type="text" name="num1"></div>
+        <div><input type="text" name="num2"></div>
+        <div><button type="submit">제출</button></div>
+    </form>
+    <div>
+        계산 결과 : {{ result }}
+    </div>
+</body>
+</html>

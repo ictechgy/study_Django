@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        {% if path == 'hn' %}
+            <h1>제목1</h1>
+            <h2>제목2</h2>
+            <h3>제목3</h3>
+            <h4>제목4</h4>
+            <h5>제목5</h5>
+            <h6>제목6</h6>
+        {% elif path == 'div' %}
+            <div>영역 분리1</div>
+            <div>영역 분리2</div>
+        {% elif path == 'p' %}
+            <p>단락 구분1</p>
+            <p>단락 구분2</p>
+        {% elif path == 'a' %}
+            <a href="http://www.naver.com">링크 이동(Naver)</a>
+            <a htref="/">링크 이동(Home Page)</a>
+        {% elif path == 'ul' %}
+            <ul>
+                <li>순서 번호 없는 목록 1</li>
+                <li>순서 번호 없는 목록 2</li>
+                <li>순서 번호 없는 목록 3</li>
+            </ul>
+        {% elif path == 'ol' %}
+            <ol>
+                <li>순서 번호 있는 목록 1</li>
+                <li>순서 번호 있는 목록 2</li>
+                <li>순서 번호 있는 목록 3</li>
+            </ol>
+        {% elif path == 'table' %}
+            <table>
+                <tr>
+                    <td>1행 1열</td><td>1행 2열</td><td>1행 3열</td>
+                </tr>
+                <tr>
+                    <td>2행 1열</td><td>2행 2열</td><td>2행 3열</td>
+                </tr>
+                <tr>
+                    <td>3행 1열</td><td>3행 2열</td><td>3행 3열</td>
+                </tr>
+            </table>
+        {% elif path == 'fieldset' %}
+            <fieldset>
+                <legend>Fieldset</legend>
+                Django Web Programming
+            </fieldset>
+        {% elif path == 'img' %}
+            <img src="/static/google.png">
+            <img src="/static/iu.jpg">
+        {% elif path == 'input' %}
+            <input type='text'><br>
+            <input type="password"><br>
+            <input type="date"><br>
+            <input type="checkbox" name="chk"><input type="checkbox" name="chk"><input type="checkbox" name="chk"><br>
+            <input type='radio' name='rdo'><input type='radio' name='rdo'><input type='radio' name='rdo'><br>
+            <button type="button">버튼</button>
+            <button type='submit'>제출</button>
+        {% elif path == 'select' %}
+            <select>
+                <option>선택1</option>
+                <option>선택2</option>
+                <option>선택3</option>
+            </select>
+        {% elif path == 'textarea' %}
+            <textarea cols=80 rows=80></textarea>
+        {% elif path == 'form' %}
+            <form action="/htm/tag/form">
+                <input type="text"><br>
+                <button type="submit">제출</button>
+            </form>
+        {% elif path == 'button' %}
+            <button type="button">버튼</button>
+            <button type="button">제출</button>
+        {% elif path == 'video' %}
+            <video src="/static/movie.mp4"></video>
+        {% endif %}
+        video태그로 재생 가능한 비디오종류는 mp4,webm(웹미디어),ogg만 가능하다고 하심
+    </body>
+
+</html>
+
+<!-- html 주석
+자꾸 이 페이지에서 오류나길래 왜그런가 했는데 띄어쓰기 엄청 중요하네 -->
